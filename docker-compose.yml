@@ -1,0 +1,9 @@
+services:
+  ask_sql_schema_apu:
+    build:
+      context: .
+    container_name: ask_sql_schema_apu
+    volumes:
+      - ./www:/var/www
+    ports:
+      - 1090:8080
