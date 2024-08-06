@@ -9,6 +9,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
 use Danilocgsilva\ClassToSqlSchemaScript\DatabaseScriptSpitter;
 use App\Domain\Front;
+use App\Domain\QueryGenerator;
 
 return function (App $app) {
     $app->options('/{routes:.*}', function (Request $request, Response $response) {
@@ -17,13 +18,17 @@ return function (App $app) {
     });
 
     $app->get('/', function (Request $request, Response $response) {
+        $queryGenerator = new QueryGenerator();
+
         $queryStringsArray = $request->getQueryParams();
 
         if (isset($queryStringsArray['database'])) {
             $databaseScriptSpitter = new DatabaseScriptSpitter($queryStringsArray['database']);
+            $queryGenerator->setSpitter($databaseScriptSpitter);
             
+            // $returnString = $databaseScriptSpitter->getScript();
             $response->getBody()->write(
-                $databaseScriptSpitter->getScript()
+                str_replace("\n", "<br />", $queryGenerator->getString())
             );
             return $response;
         }
@@ -49,8 +54,13 @@ return function (App $app) {
                 str_replace("\n", "<br />", $returnString) 
             );
 
+            // if (isset($queryStringsArray['foreigns'])) {
+    
+            // }
+
             return $response;
         }
+
 
         $response->getBody()->write(
             "You must choose if you want to generate a database or a table sql script."
