@@ -2,15 +2,13 @@
 
 declare(strict_types=1);
 
-use App\Application\Actions\User\ListUsersAction;
-use App\Application\Actions\User\ViewUserAction;
 use Danilocgsilva\ClassToSqlSchemaScript\FieldScriptSpitter;
 use Danilocgsilva\ClassToSqlSchemaScript\TableScriptSpitter;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\App;
-use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 use Danilocgsilva\ClassToSqlSchemaScript\DatabaseScriptSpitter;
+use App\Domain\Front;
 
 return function (App $app) {
     $app->options('/{routes:.*}', function (Request $request, Response $response) {
@@ -33,19 +31,24 @@ return function (App $app) {
         if (isset($queryStringsArray['table'])) {
             $tableScriptSpitter = new TableScriptSpitter($queryStringsArray['table']);
 
-            // if (isset($queryStringsArray['id'])) {
-            //     $tableScriptSpitter->addField(
-            //         (new FieldScriptSpitter($queryStringsArray['id']))
-            //         ->setType("INT")
-            //         ->setUnsigned()
-            //         ->setAutoIncrement()
-            //         ->setNotNull()
-            //         ->setPrimaryKey()
-            //     );
-            // }
+            if (isset($queryStringsArray['fields'])) {
+                foreach ($queryStringsArray['fields'] as $keyFieldName => $typePrimary) {
+                    // $typePrimaryParts = explode(":", $typePrimary);
+                    // $type = $typePrimaryParts[0];
 
-            if () {
+                    // $field = (new FieldScriptSpitter($keyFieldName))
+                    // ->setType($type);
 
+                    // if (count($typePrimaryParts) > 1 && $typePrimaryParts[1] === "KEY") {
+                    //     $field
+                    //     ->setNotNull()
+                    //     ->setPrimaryKey()
+                    //     ->setUnsigned();
+                    // }
+
+                    // $tableScriptSpitter->addField($field);
+                    Front::addUserDataToTableScriptSpitter($tableScriptSpitter, $typePrimary, $keyFieldName);
+                }
             }
 
             $response->getBody()->write(
