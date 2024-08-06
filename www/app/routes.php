@@ -28,31 +28,25 @@ return function (App $app) {
             return $response;
         }
 
-        if (isset($queryStringsArray['table'])) {
-            $tableScriptSpitter = new TableScriptSpitter($queryStringsArray['table']);
-
-            if (isset($queryStringsArray['fields'])) {
-                foreach ($queryStringsArray['fields'] as $keyFieldName => $typePrimary) {
-                    // $typePrimaryParts = explode(":", $typePrimary);
-                    // $type = $typePrimaryParts[0];
-
-                    // $field = (new FieldScriptSpitter($keyFieldName))
-                    // ->setType($type);
-
-                    // if (count($typePrimaryParts) > 1 && $typePrimaryParts[1] === "KEY") {
-                    //     $field
-                    //     ->setNotNull()
-                    //     ->setPrimaryKey()
-                    //     ->setUnsigned();
-                    // }
-
-                    // $tableScriptSpitter->addField($field);
-                    Front::addUserDataToTableScriptSpitter($tableScriptSpitter, $typePrimary, $keyFieldName);
+        if (isset($queryStringsArray['tables'])) {
+            $tablesToGenerate = [];
+            foreach ($queryStringsArray['tables'] as $tableName) {
+                $tableScriptSpitter = new TableScriptSpitter($tableName);
+                if (isset($queryStringsArray['fields'])) {
+                    foreach ($queryStringsArray['fields'] as $keyFieldName => $typePrimary) {
+                        Front::addUserDataToTableScriptSpitter($tableScriptSpitter, $typePrimary, $keyFieldName);
+                    }
                 }
+                $tablesToGenerate[] = $tableScriptSpitter;
+            }
+            
+            $returnString = "";
+            foreach ($tablesToGenerate as $tableToGenerate) {
+                $returnString .= $tableToGenerate->getScript() . "\n";
             }
 
             $response->getBody()->write(
-                str_replace("\n", "<br />", $tableScriptSpitter->getScript()) 
+                str_replace("\n", "<br />", $returnString) 
             );
 
             return $response;
