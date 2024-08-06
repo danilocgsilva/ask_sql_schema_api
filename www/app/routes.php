@@ -18,49 +18,40 @@ return function (App $app) {
     });
 
     $app->get('/', function (Request $request, Response $response) {
-        $queryGenerator = new QueryGenerator();
-
+        
         $queryStringsArray = $request->getQueryParams();
-
-        if (isset($queryStringsArray['database'])) {
-            $databaseScriptSpitter = new DatabaseScriptSpitter($queryStringsArray['database']);
-            $queryGenerator->setSpitter($databaseScriptSpitter);
+        
+        $database = $queryStringsArray['database'] ?? false;
+        $tables = $queryStringsArray['tables'] ?? false;
+        $foreigns = $queryStringsArray['foreigns'] ?? false;
+        $fields = $queryStringsArray['fields'] ?? false;
+        
+        if ($database|| $tables || $foreigns) {
+            $queryGenerator = new QueryGenerator();
             
-            // $returnString = $databaseScriptSpitter->getScript();
-            $response->getBody()->write(
-                str_replace("\n", "<br />", $queryGenerator->getString())
-            );
-            return $response;
-        }
-
-        if (isset($queryStringsArray['tables'])) {
-            $tablesToGenerate = [];
-            foreach ($queryStringsArray['tables'] as $tableName) {
-                $tableScriptSpitter = new TableScriptSpitter($tableName);
-                if (isset($queryStringsArray['fields'])) {
-                    foreach ($queryStringsArray['fields'] as $keyFieldName => $typePrimary) {
-                        Front::addUserDataToTableScriptSpitter($tableScriptSpitter, $typePrimary, $keyFieldName);
-                    }
-                }
-                $tablesToGenerate[] = $tableScriptSpitter;
+            if ($database) {
+                $databaseScriptSpitter = new DatabaseScriptSpitter($database);
+                $queryGenerator->setDatabaseSpitter($databaseScriptSpitter);
             }
-            
-            $returnString = "";
-            foreach ($tablesToGenerate as $tableToGenerate) {
-                $returnString .= $tableToGenerate->getScript() . "\n";
-            }
-
-            $response->getBody()->write(
-                str_replace("\n", "<br />", $returnString) 
-            );
-
-            // if (isset($queryStringsArray['foreigns'])) {
     
-            // }
+            if ($tables) {
+                $queryGenerator->addTables($tables);
+    
+                if ($fields) {
+                    $queryGenerator->addFields($fields);
+                }
+            }
+
+            if ($foreigns) {
+                $queryGenerator->addForeigns($foreigns);
+            }
+
+            $response->getBody()->write(
+                str_replace("\n", "<br />", $queryGenerator->getString()) 
+            );
 
             return $response;
         }
-
 
         $response->getBody()->write(
             "You must choose if you want to generate a database or a table sql script."

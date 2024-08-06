@@ -25,3 +25,9 @@ Create a table with fields:
 ```
 http://localhost:1090/?tables[]=neighborhood&fields[id]=INT:KEY&fields[code]=VARCHAR(255)&fields[name]=VARCHAR(255)
 ```
+
+Foreigns keys (same table)
+```
+http://localhost:1090/?tables[]=neighborhood&fields[id]=INT:KEY&fields[name]=VARCHAR(255)&fields[parent_place]=INT&foreigns[]=parent_place:id
+```
+Obs: is working just with one table.
