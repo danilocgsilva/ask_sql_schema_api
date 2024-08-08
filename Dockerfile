@@ -10,4 +10,4 @@ COPY config/000-default.conf /etc/apache2/sites-available/
 COPY config/xdebug.ini /etc/php/8.2/mods-available/xdebug.ini
 RUN chmod +x ./startup.sh
 
-CMD while : ; do sleep 1000; done
+CMD php -S 0.0.0.0:8080 -t /var/www/public
