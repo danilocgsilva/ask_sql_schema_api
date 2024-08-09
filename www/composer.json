@@ -24,7 +24,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "ext-json": "*",
-        "danilocgsilva/class_to_sql_schema_script": "^1.6",
+        "danilocgsilva/class_to_sql_schema_script": "^1.7",
         "monolog/monolog": "^2.8",
         "php-di/php-di": "^6.4",
         "slim/psr7": "^1.5",
