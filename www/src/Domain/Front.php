@@ -25,6 +25,7 @@ class Front
         if (count($typePrimaryParts) > 1 && $typePrimaryParts[1] === "KEY") {
             $field
             ->setNotNull()
+            ->setAutoIncrement()
             ->setPrimaryKey()
             ->setUnsigned();
         }

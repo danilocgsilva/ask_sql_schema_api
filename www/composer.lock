@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7c4658a1337d0ee52ae478ebe3ddf932",
+    "content-hash": "1f01e4dfd4056342adffc923cce2db11",
     "packages": [
         {
             "name": "danilocgsilva/class_to_sql_schema_script",
-            "version": "1.6.0",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/danilocgsilva/class_to_sql_schema_script.git",
-                "reference": "48762fbce35c4f21c5da740be9a26c21d22bfc75"
+                "reference": "36d89a77bd7905b689393151310d3abfa0ae12a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/danilocgsilva/class_to_sql_schema_script/zipball/48762fbce35c4f21c5da740be9a26c21d22bfc75",
-                "reference": "48762fbce35c4f21c5da740be9a26c21d22bfc75",
+                "url": "https://api.github.com/repos/danilocgsilva/class_to_sql_schema_script/zipball/36d89a77bd7905b689393151310d3abfa0ae12a9",
+                "reference": "36d89a77bd7905b689393151310d3abfa0ae12a9",
                 "shasum": ""
             },
             "require-dev": {
@@ -38,9 +38,9 @@
             ],
             "support": {
                 "issues": "https://github.com/danilocgsilva/class_to_sql_schema_script/issues",
-                "source": "https://github.com/danilocgsilva/class_to_sql_schema_script/tree/1.6.0"
+                "source": "https://github.com/danilocgsilva/class_to_sql_schema_script/tree/1.7.0"
             },
-            "time": "2024-06-26T18:19:53+00:00"
+            "time": "2024-08-09T13:02:34+00:00"
         },
         {
             "name": "fig/http-message-util",
@@ -100,26 +100,27 @@
         },
         {
             "name": "laravel/serializable-closure",
-            "version": "v1.3.3",
+            "version": "v1.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/serializable-closure.git",
-                "reference": "3dbf8a8e914634c48d389c1234552666b3d43754"
+                "reference": "61b87392d986dc49ad5ef64e75b1ff5fee24ef81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/3dbf8a8e914634c48d389c1234552666b3d43754",
-                "reference": "3dbf8a8e914634c48d389c1234552666b3d43754",
+                "url": "https://api.github.com/repos/laravel/serializable-closure/zipball/61b87392d986dc49ad5ef64e75b1ff5fee24ef81",
+                "reference": "61b87392d986dc49ad5ef64e75b1ff5fee24ef81",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.3|^8.0"
             },
             "require-dev": {
-                "nesbot/carbon": "^2.61",
+                "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
+                "nesbot/carbon": "^2.61|^3.0",
                 "pestphp/pest": "^1.21.3",
                 "phpstan/phpstan": "^1.8.2",
-                "symfony/var-dumper": "^5.4.11"
+                "symfony/var-dumper": "^5.4.11|^6.2.0|^7.0.0"
             },
             "type": "library",
             "extra": {
@@ -156,7 +157,7 @@
                 "issues": "https://github.com/laravel/serializable-closure/issues",
                 "source": "https://github.com/laravel/serializable-closure"
             },
-            "time": "2023-11-08T14:08:06+00:00"
+            "time": "2024-08-02T07:48:17+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1927,16 +1928,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.11.9",
+            "version": "1.11.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "e370bcddadaede0c1716338b262346f40d296f82"
+                "reference": "640410b32995914bde3eed26fa89552f9c2c082f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/e370bcddadaede0c1716338b262346f40d296f82",
-                "reference": "e370bcddadaede0c1716338b262346f40d296f82",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/640410b32995914bde3eed26fa89552f9c2c082f",
+                "reference": "640410b32995914bde3eed26fa89552f9c2c082f",
                 "shasum": ""
             },
             "require": {
@@ -1981,7 +1982,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-08-01T16:25:18+00:00"
+            "time": "2024-08-08T09:02:50+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",

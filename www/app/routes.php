@@ -26,7 +26,7 @@ return function (App $app) {
         $foreigns = $queryStringsArray['foreigns'] ?? false;
         $fields = $queryStringsArray['fields'] ?? false;
         
-        if ($database|| $tables || $foreigns) {
+        if ($database || $tables || $foreigns) {
             $queryGenerator = new QueryGenerator();
             
             if ($database) {
